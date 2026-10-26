@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-manuale: "Manuale", Georgia, serif;
+  --font-raleway: "Raleway", sans-serif;
+
+  --color-primary: #f54a00;
+  --color-primary-dark: #c83800;
+  --color-primary-light: #ff7839;
+  --color-secondary: #050813;
+  --color-navy: #0a1c3b;
+  --color-cream: #f7f5ef;
+}
+
+html,
+body {
+  font-family: var(--font-sans);
+  background-color: #ffffff;
+  color: #111827;
+  overflow-x: hidden;
+}
+
+.font-manuale {
+  font-family: var(--font-manuale);
+}
+
+.font-raleway {
+  font-family: var(--font-raleway);
+}

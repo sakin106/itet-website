@@ -1,0 +1,270 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// -------------------------------------------------------------
+// 1. User & Roles
+// -------------------------------------------------------------
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("MEMBER") // ADMIN, MEMBER, CLIENT
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relational mappings
+  memberProfile      MemberProfile?
+  eventRegistrations EventRegistration[]
+  qaPosts            QaPost[]
+  qaReplies          QaReply[]
+  qaLikes            QaLike[]
+  jobOpportunities   JobOpportunity[]
+  adBanners          AdBanner[]
+  notices            Notice[]
+  publications       Publication[]
+}
+
+// -------------------------------------------------------------
+// 2. MemberProfile (Phase 2 Specifications)
+// -------------------------------------------------------------
+model MemberProfile {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  memberId           String   @unique // e.g. "LM-4082"
+  membershipType     String   @default("LIFE") // LIFE, GENERAL, STUDENT, HONORARY
+  approvalStatus     String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  
+  fullName           String
+  phone              String?
+  avatarUrl          String?
+  
+  // Academic & Batch details
+  batch              String   // e.g. "34th Batch"
+  admissionSession   String   // Phase 2 required field: e.g. "2010-2011"
+  passingYear        String?
+  institute          String   // e.g. "Bangladesh University of Textiles (BUTEX)"
+  degree             String?  // e.g. "B.Sc. in Textile Engineering"
+  
+  // Geographic zoning & demographics
+  presentAddressZone String   // Phase 2 required field: e.g. "Dhaka North (Uttara Sector 11)"
+  permanentDistrict  String?  // e.g. "Cumilla"
+  bloodGroup         String?  // e.g. "B+"
+  iebNo              String?  // e.g. "M-38291"
+  
+  // Employment & Professional
+  company            String?  // e.g. "Square Fashions Ltd."
+  designation        String?  // e.g. "Assistant General Manager"
+  bio                String?
+  certDocUrl         String?  // Attached credentials for admin approval
+  
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+// -------------------------------------------------------------
+// 3. Event & EventRegistration
+// -------------------------------------------------------------
+model Event {
+  id              String              @id @default(cuid())
+  title           String
+  slug            String              @unique
+  description     String
+  startDate       DateTime
+  endDate         DateTime?
+  venue           String
+  location        String?
+  bannerUrl       String?
+  registrationFee Float               @default(0.0)
+  maxCapacity     Int?
+  isPublished     Boolean             @default(true)
+  isFeatured      Boolean             @default(false)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  registrations   EventRegistration[]
+}
+
+model EventRegistration {
+  id            String   @id @default(cuid())
+  eventId       String
+  event         Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ticketNumber  String   @unique // e.g. "ITET-NTC-1049"
+  paymentStatus String   @default("PAID") // PENDING, PAID, CANCELLED
+  paymentAmount Float    @default(0.0)
+  checkedIn     Boolean  @default(false)
+  checkedInAt   DateTime?
+  registeredAt  DateTime @default(now())
+
+  @@unique([eventId, userId])
+}
+
+// -------------------------------------------------------------
+// 4. QaPost & QaReply (Community Forum)
+// -------------------------------------------------------------
+model QaPost {
+  id          String    @id @default(cuid())
+  title       String
+  content     String
+  category    String    // Spinning & Yarn, Dyeing & Finishing, Garments, etc.
+  tags        String    // Comma-separated tags
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isPinned    Boolean   @default(false)
+  isClosed    Boolean   @default(false)
+  flagged     Boolean   @default(false)
+  flagReason  String?
+  likesCount  Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  replies     QaReply[]
+  likes       QaLike[]
+}
+
+model QaReply {
+  id         String   @id @default(cuid())
+  content    String
+  postId     String
+  post       QaPost   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likesCount Int      @default(0)
+  isAccepted Boolean  @default(false)
+  flagged    Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model QaLike {
+  id        String   @id @default(cuid())
+  postId    String
+  post      QaPost   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId])
+}
+
+// -------------------------------------------------------------
+// 5. JobOpportunity (Client Portal Job Circulars)
+// -------------------------------------------------------------
+model JobOpportunity {
+  id                  String   @id @default(cuid())
+  title               String
+  companyName         String
+  companyLogo         String?
+  jobLocation         String   // e.g. "Gazipur", "Dhaka North"
+  employmentType      String   // FULL_TIME, PART_TIME, CONTRACT
+  experience          String   // e.g. "3-5 years"
+  education           String?  // e.g. "B.Sc. in Textile Engineering"
+  salaryRange         String?  // e.g. "80,000 - 120,000 BDT"
+  description         String
+  requirements        String?
+  applicationDeadline DateTime
+  applicationUrl      String?
+  contactEmail        String?
+  approvalStatus      String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  
+  postedById          String
+  postedBy            User     @relation(fields: [postedById], references: [id], onDelete: Cascade)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+// -------------------------------------------------------------
+// 6. MarketplacePrice (Yarn, Chemical, Thread updates)
+// -------------------------------------------------------------
+model MarketplacePrice {
+  id             String   @id @default(cuid())
+  category       String   // YARN, DYES_CHEMICALS, SEWING_THREAD, RAW_COTTON
+  commodityName  String   // e.g. "30s Carded Cotton Yarn"
+  specifications String?  // e.g. "Ring Spun, 100% Cotton, Export Quality"
+  unit           String   // kg, lb, ton, cone
+  currentPrice   Float
+  currency       String   @default("USD") // USD, BDT
+  priceChange    Float    @default(0.0) // Percentage change (+1.5%)
+  priceTrend     String   @default("STABLE") // UP, DOWN, STABLE
+  originMarket   String?  // "Local Bangladesh", "India FOB", "China CIF"
+  reportedBy     String?  // Company name or source reporting price
+  effectiveDate  DateTime @default(now())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// -------------------------------------------------------------
+// 7. AdBanner (Client Ads: 9:16 and 2.35:1 aspect ratios)
+// -------------------------------------------------------------
+model AdBanner {
+  id               String   @id @default(cuid())
+  title            String
+  clientName       String
+  placement        String   // HERO_LEFT, HERO_RIGHT, NAVBAR_POPUP, LANDSCAPE_WIDE
+  aspectRatio      String   // "9:16", "2.35:1", "1:1", "16:9"
+  imageUrl         String
+  targetUrl        String?
+  startDate        DateTime
+  endDate          DateTime
+  durationDays     Int      @default(30)
+  totalAmount      Float?
+  paymentStatus    String   @default("PAID") // PENDING, PAID, OVERDUE
+  approvalStatus   String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  isActive         Boolean  @default(true)
+  impressionsCount Int      @default(0)
+  clicksCount      Int      @default(0)
+  
+  uploadedById     String
+  uploadedBy       User     @relation(fields: [uploadedById], references: [id], onDelete: Cascade)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+// -------------------------------------------------------------
+// 8. Notice & Publication
+// -------------------------------------------------------------
+model Notice {
+  id          String   @id @default(cuid())
+  noticeNo    String   // e.g. "ITET/NOT/2026/04"
+  title       String
+  category    String   // Executive Council, Election, AGM, General
+  content     String
+  pdfUrl      String?  // Direct download PDF
+  publishDate DateTime @default(now())
+  isUrgent    Boolean  @default(false)
+  isPublished Boolean  @default(true)
+  
+  authorId    String?
+  author      User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Publication {
+  id          String   @id @default(cuid())
+  title       String
+  journalName String?  // e.g. "Textile Today", "Journal of Textile Engineering"
+  volumeIssue String?  // e.g. "Vol. 15, Issue 2"
+  category    String   // Technical Textiles, Nanofibers, Apparel Manufacturing
+  authors     String   // e.g. "Dr. Engr. Tanvir Ahmed, Prof. Dr. M. A. Kashem"
+  abstract    String
+  keywords    String?  // e.g. "Jutton yarn; Pad-dry-cure; Tensile strength"
+  doiUrl      String?
+  pdfUrl      String?
+  publishYear Int      // 2026
+  isPublished Boolean  @default(true)
+  
+  authorId    String?
+  author      User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
