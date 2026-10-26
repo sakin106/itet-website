@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import type { LucideIcon } from "lucide-react";
 import { ArrowRight } from "lucide-react";
 
@@ -53,7 +53,7 @@ export function ResponsibilityCard({
 
   if (href) {
     return (
-      <Link to={href} className="block h-full">
+      <Link href={href} className="block h-full">
         {content}
       </Link>
     );

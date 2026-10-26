@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import {
   BookOpen,
   Target,
@@ -92,7 +92,7 @@ export function MegaMenuAbout({ isOpen, onClose }: MegaMenuProps) {
                   return (
                     <Link
                       key={item.to}
-                      to={item.to}
+                      href={item.to}
                       onClick={onClose}
                       className="group flex items-center justify-between p-3 rounded-lg border border-gray-100 bg-gray-50/60 hover:bg-orange-50/50 hover:border-orange-200/70 transition-all duration-200"
                     >

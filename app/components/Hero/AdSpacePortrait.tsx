@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import { Image as ImageIcon } from "lucide-react";
 
 export function AdSpacePortrait() {
@@ -49,7 +49,7 @@ export function AdSpacePortrait() {
           (Portrait)
         </span>
         <Link
-          to="/contact"
+          href="/contact"
           className="mt-4 sm:mt-5 inline-flex items-center justify-center px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-white/[0.08] hover:bg-white/[0.14] backdrop-blur-md border border-white/20 text-white text-xs sm:text-[13px] font-medium shadow-md transition-all hover:border-white/35"
         >
           <span>Book this space</span>

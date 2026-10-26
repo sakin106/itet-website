@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import {
   MapPin,
   Phone,
@@ -48,7 +48,7 @@ export function Footer() {
           {/* Column 1: Brand & Portals (4 Cols) */}
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
-              <Link to="/" className="inline-block group">
+              <Link href="/" className="inline-block group">
                 <div className="flex items-center gap-3.5 mb-5">
                   <div className="p-1.5 bg-white rounded-md shadow-lg group-hover:scale-105 transition-all duration-300 ring-1 ring-white/20 shrink-0">
                     <img
@@ -72,8 +72,7 @@ export function Footer() {
 
             {/* Quick Portals */}
             <div className="grid grid-cols-2 lg:grid-cols-1 gap-3 md:gap-5 lg:max-w-xs">
-              <Link
-                to="/member-portal"
+              <Link href="/member-portal"
                 className="group flex items-center justify-between p-2.5 rounded-md bg-white/[0.05] border border-white/10 hover:border-white/20 hover:bg-white/[0.09] transition-all duration-300 backdrop-blur-sm"
               >
                 <div className="flex items-center gap-2">
@@ -85,8 +84,7 @@ export function Footer() {
                 <ArrowRight className="w-3.5 h-3.5 text-primary group-hover:translate-x-1 transition-transform" />
               </Link>
 
-              <Link
-                to="/client-portal"
+              <Link href="/client-portal"
                 className="group flex items-center justify-between p-2.5 rounded-md bg-white/[0.05] border border-white/10 hover:border-white/20 hover:bg-white/[0.09] transition-all duration-300 backdrop-blur-sm"
               >
                 <div className="flex items-center gap-2">
@@ -116,8 +114,7 @@ export function Footer() {
                 { label: "Photo Gallery", path: "/gallery" },
               ].map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
+                  <Link href={link.path}
                     className="text-gray-300/80 hover:text-primary hover:translate-x-1.5 transition-all duration-200 flex items-center gap-2 text-sm group py-0.5"
                   >
                     <ChevronRight className="w-3 h-3 text-primary/70 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
@@ -142,8 +139,7 @@ export function Footer() {
                 { label: "Contact Us", path: "/contact" },
               ].map((link) => (
                 <li key={link.path}>
-                  <Link
-                    to={link.path}
+                  <Link href={link.path}
                     className="text-gray-300/80 hover:text-primary hover:translate-x-1.5 transition-all duration-200 flex items-center gap-2 text-sm group py-0.5"
                   >
                     <ChevronRight className="w-3 h-3 text-primary/70 group-hover:text-primary group-hover:translate-x-0.5 transition-all" />

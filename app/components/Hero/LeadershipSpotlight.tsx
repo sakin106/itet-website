@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useState } from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import { Quote } from "lucide-react";
 
 export function LeadershipSpotlight() {
@@ -96,7 +98,7 @@ export function LeadershipSpotlight() {
                 </p>
               </div>
               <Link
-                to="/committee"
+                href="/committee"
                 className="text-xs font-semibold text-primary hover:text-orange-300 flex items-center gap-1 transition-colors"
               >
                 <span>View Council</span>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 interface AlumniCardProps {
@@ -84,7 +84,7 @@ export function AlumniCard({
 
         {/* View Details Link */}
         <Link
-          to="/membership-overview"
+          href="/membership-overview"
           className="text-xs font-semibold text-gray-800 hover:text-primary transition-colors flex items-center gap-1 group/btn"
         >
           <span>View Details</span>

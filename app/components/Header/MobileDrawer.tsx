@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useState } from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import {
   X,
   ChevronDown,
@@ -57,7 +59,7 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
             {/* Home */}
             <li className="border-b border-gray-100">
               <Link
-                to="/"
+                href="/"
                 onClick={onClose}
                 className="flex items-center justify-between p-3.5 hover:bg-gray-50 text-primary font-semibold bg-orange-50/40 text-sm"
               >
@@ -83,49 +85,49 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
               {aboutOpen && (
                 <div className="bg-gray-50/80 px-4 py-2 space-y-1.5 border-t border-gray-100/60">
                   <Link
-                    to="/history-itet"
+                    href="/history-itet"
                     onClick={onClose}
                     className="block py-1.5 text-xs font-medium text-gray-600 hover:text-primary transition-colors"
                   >
                     History Of ITET
                   </Link>
                   <Link
-                    to="/mission-vision"
+                    href="/mission-vision"
                     onClick={onClose}
                     className="block py-1.5 text-xs font-medium text-gray-600 hover:text-primary transition-colors"
                   >
                     Mission & Vision
                   </Link>
                   <Link
-                    to="/constitution"
+                    href="/constitution"
                     onClick={onClose}
                     className="block py-1.5 text-xs font-medium text-gray-600 hover:text-primary transition-colors"
                   >
                     Constitution
                   </Link>
                   <Link
-                    to="/committee"
+                    href="/committee"
                     onClick={onClose}
                     className="block py-1.5 text-xs font-medium text-gray-600 hover:text-primary transition-colors"
                   >
                     Committee Members
                   </Link>
                   <Link
-                    to="/former-leaders"
+                    href="/former-leaders"
                     onClick={onClose}
                     className="block py-1.5 text-xs font-medium text-gray-600 hover:text-primary transition-colors"
                   >
                     Former Leaders
                   </Link>
                   <Link
-                    to="/stockholders"
+                    href="/stockholders"
                     onClick={onClose}
                     className="block py-1.5 text-xs font-medium text-gray-600 hover:text-primary transition-colors"
                   >
                     Stockholder List
                   </Link>
                   <Link
-                    to="/welfareTrust"
+                    href="/welfareTrust"
                     onClick={onClose}
                     className="block py-1.5 text-xs font-medium text-gray-600 hover:text-primary transition-colors"
                   >
@@ -152,35 +154,35 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
               {membershipOpen && (
                 <div className="bg-gray-50/80 px-4 py-2 space-y-1.5 border-t border-gray-100/60">
                   <Link
-                    to="/membership-overview"
+                    href="/membership-overview"
                     onClick={onClose}
                     className="block py-1.5 text-xs font-medium text-gray-600 hover:text-primary transition-colors"
                   >
                     Membership Overview
                   </Link>
                   <Link
-                    to="/members-benifits"
+                    href="/members-benifits"
                     onClick={onClose}
                     className="block py-1.5 text-xs font-medium text-gray-600 hover:text-primary transition-colors"
                   >
                     Members Benefits
                   </Link>
                   <Link
-                    to="/membership-overview"
+                    href="/membership-overview"
                     onClick={onClose}
                     className="block py-1.5 text-xs font-medium text-gray-600 hover:text-primary transition-colors"
                   >
                     General Membership
                   </Link>
                   <Link
-                    to="/membership-login"
+                    href="/membership-login"
                     onClick={onClose}
                     className="block py-1.5 text-xs font-medium text-gray-600 hover:text-primary transition-colors"
                   >
                     Renew Membership
                   </Link>
                   <Link
-                    to="/membership-login"
+                    href="/membership-login"
                     onClick={onClose}
                     className="block py-1.5 text-xs font-semibold text-primary hover:underline"
                   >
@@ -200,7 +202,7 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
             ].map((item) => (
               <li key={item.to} className="border-b border-gray-100">
                 <Link
-                  to={item.to}
+                  href={item.to}
                   onClick={onClose}
                   className="flex items-center justify-between p-3.5 hover:bg-gray-50 text-gray-700 text-sm font-semibold transition-colors"
                 >
@@ -246,7 +248,7 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
                   (Square)
                 </span>
                 <Link
-                  to="/contact"
+                  href="/contact"
                   onClick={onClose}
                   className="mt-2.5 inline-flex items-center justify-center px-3 py-1.5 rounded-lg bg-white/[0.08] hover:bg-white/[0.14] border border-white/20 text-white text-[11px] font-medium"
                 >
@@ -263,14 +265,14 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
             </h3>
             <div className="space-y-2">
               <Link
-                to="/member-portal"
+                href="/member-portal"
                 onClick={onClose}
                 className="block text-xs font-medium text-gray-600 hover:text-primary transition-all hover:translate-x-0.5"
               >
                 Members Portal
               </Link>
               <Link
-                to="/client-portal"
+                href="/client-portal"
                 onClick={onClose}
                 className="block text-xs font-medium text-gray-600 hover:text-primary transition-all hover:translate-x-0.5"
               >
@@ -305,7 +307,7 @@ export function MobileDrawer({ isOpen, onClose }: MobileDrawerProps) {
           {/* Query & Answer Button */}
           <div className="px-4 pb-2">
             <Link
-              to="/member-portal/qna"
+              href="/member-portal/qna"
               onClick={onClose}
               className="w-full bg-primary hover:bg-primary-dark text-white font-semibold py-2.5 px-4 rounded-lg text-xs text-center flex items-center justify-center gap-2 shadow-xs transition-colors"
             >

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 
 interface BreadcrumbItem {
@@ -41,7 +41,7 @@ export function PageHeader({
         <nav aria-label="Breadcrumb" className="mb-4">
           <ol className="flex items-center gap-1.5 text-xs text-gray-400 flex-wrap">
             <li className="flex items-center gap-1.5">
-              <Link to="/" className="hover:text-primary transition-colors flex items-center gap-1">
+              <Link href="/" className="hover:text-primary transition-colors flex items-center gap-1">
                 <Home className="w-3.5 h-3.5" />
                 <span>Home</span>
               </Link>
@@ -50,7 +50,7 @@ export function PageHeader({
               <li key={idx} className="flex items-center gap-1.5">
                 <ChevronRight className="w-3 h-3 text-gray-600" />
                 {crumb.href ? (
-                  <Link to={crumb.href} className="hover:text-primary transition-colors">
+                  <Link href={crumb.href} className="hover:text-primary transition-colors">
                     {crumb.label}
                   </Link>
                 ) : (

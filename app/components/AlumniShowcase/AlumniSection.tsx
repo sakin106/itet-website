@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import { AlumniCard } from "./AlumniCard";
 
 export function AlumniSection() {
@@ -79,7 +79,7 @@ export function AlumniSection() {
         {/* View All Button */}
         <div className="mt-12 text-center">
           <Link
-            to="/committee"
+            href="/committee"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white hover:bg-primary hover:text-white text-gray-800 text-xs sm:text-sm font-semibold border border-gray-200/90 shadow-2xs transition-all duration-200"
           >
             <span>View All Committee Leaders &amp; Alumni</span>

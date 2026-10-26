@@ -1,12 +1,16 @@
+"use client";
+
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown, LogIn, Menu } from "lucide-react";
 import { MegaMenuAbout } from "./MegaMenuAbout";
 import { MegaMenuMembership } from "./MegaMenuMembership";
 import { MobileDrawer } from "./MobileDrawer";
 
 export function Navbar() {
-  const location = useLocation();
+  const pathname = usePathname();
+  const location = { pathname: pathname || "/" };
   const [activeMenu, setActiveMenu] = useState<"about" | "membership" | null>(null);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
@@ -31,7 +35,7 @@ export function Navbar() {
           <div className="flex items-center justify-between h-16 sm:h-18">
             {/* Brand Logo & Name */}
             <Link
-              to="/"
+              href="/"
               onClick={closeMenus}
               className="flex items-center gap-2.5 sm:gap-3 group shrink-0"
             >
@@ -53,7 +57,7 @@ export function Navbar() {
             {/* Desktop Center Navigation */}
             <nav className="hidden xl:flex items-center gap-1 lg:gap-1.5">
               <Link
-                to="/"
+                href="/"
                 onClick={closeMenus}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 ${
                   isLinkActive("/")
@@ -118,7 +122,7 @@ export function Navbar() {
               ].map((item) => (
                 <Link
                   key={item.to}
-                  to={item.to}
+                  href={item.to}
                   onClick={closeMenus}
                   className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-150 ${
                     isLinkActive(item.to)
@@ -134,7 +138,7 @@ export function Navbar() {
             {/* Right Desktop CTA */}
             <div className="hidden xl:flex items-center gap-3">
               <Link
-                to="/member-portal"
+                href="/member-portal"
                 className="bg-secondary hover:bg-primary text-white text-xs font-semibold px-4 py-2 rounded-md shadow-xs hover:shadow-sm transition-all duration-200 flex items-center gap-1.5 group cursor-pointer"
               >
                 <LogIn className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />

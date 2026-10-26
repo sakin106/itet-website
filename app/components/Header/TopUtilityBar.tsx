@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import { Phone, Mail, MapPin } from "lucide-react";
 
 export function TopUtilityBar() {
@@ -34,19 +34,19 @@ export function TopUtilityBar() {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-4 font-medium">
               <Link
-                to="/member-portal"
+                href="/member-portal"
                 className="hover:text-primary transition-colors"
               >
                 Members Portal
               </Link>
               <Link
-                to="/client-portal"
+                href="/client-portal"
                 className="hover:text-primary transition-colors"
               >
                 Advertiser Portal
               </Link>
               <Link
-                to="/contact"
+                href="/contact"
                 className="hover:text-primary transition-colors"
               >
                 Contact Us

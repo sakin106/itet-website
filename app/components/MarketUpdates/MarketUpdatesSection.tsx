@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import { MoreVertical, ArrowRight, FlaskConical, Scissors } from "lucide-react";
 
 interface PriceItem {
@@ -150,7 +150,7 @@ export function MarketUpdatesSection() {
                           </span>
                         </span>
                         <Link
-                          to="/notices"
+                          href="/notices"
                           className="text-xs font-semibold text-primary hover:underline transition-colors"
                         >
                           Details
@@ -164,7 +164,7 @@ export function MarketUpdatesSection() {
               {/* Card Footer Link */}
               <div className="pt-4 mt-2 border-t border-gray-100 text-center">
                 <Link
-                  to={cat.viewAllLink}
+                  href={cat.viewAllLink}
                   className="inline-flex items-center justify-center gap-1.5 text-xs sm:text-sm font-semibold text-primary hover:text-primary-dark transition-colors group"
                 >
                   <span>{cat.linkText}</span>

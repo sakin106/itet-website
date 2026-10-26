@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import { Image as ImageIcon } from "lucide-react";
 
 export function AdSpaceLandscape() {
@@ -50,7 +50,7 @@ export function AdSpaceLandscape() {
 
         <div className="flex items-center gap-3">
           <Link
-            to="/contact"
+            href="/contact"
             className="inline-flex items-center px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl bg-white/[0.08] hover:bg-white/[0.14] backdrop-blur-md border border-white/20 text-white text-xs font-medium shadow-md transition-all hover:border-white/35"
           >
             <span>Book this space</span>

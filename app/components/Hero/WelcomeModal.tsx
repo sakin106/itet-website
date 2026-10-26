@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import { X, ArrowRight, Sparkles, Clock } from "lucide-react";
 
 export function WelcomeModal() {
@@ -62,7 +64,7 @@ export function WelcomeModal() {
             {/* Actions */}
             <div className="space-y-2.5">
               <Link
-                to="/membership-overview"
+                href="/membership-overview"
                 onClick={() => setIsOpen(false)}
                 className="w-full bg-[#0a1124] hover:bg-primary text-white font-semibold py-3 px-5 rounded-xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm transition-all duration-200 cursor-pointer active:scale-98"
               >
@@ -70,7 +72,7 @@ export function WelcomeModal() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                to="/client-portal"
+                href="/client-portal"
                 onClick={() => setIsOpen(false)}
                 className="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2.5 px-5 rounded-xl text-xs sm:text-sm flex items-center justify-center transition-colors cursor-pointer"
               >

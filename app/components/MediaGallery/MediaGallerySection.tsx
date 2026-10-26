@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { GalleryCard } from "./GalleryCard";
 
@@ -104,7 +104,7 @@ export function MediaGallerySection() {
             </p>
           </div>
           <Link
-            to="/gallery"
+            href="/gallery"
             className="text-sm sm:text-base text-gray-700 hover:text-primary hover:underline font-medium inline-flex items-center gap-1.5 self-start sm:self-end transition-colors group cursor-pointer shrink-0"
           >
             <span>Explore All Archives</span>
@@ -122,7 +122,7 @@ export function MediaGallerySection() {
         {/* See More */}
         <div className="mt-10 sm:mt-12 flex justify-center items-center">
           <Link
-            to="/gallery"
+            href="/gallery"
             className="inline-flex items-center gap-2 px-6 sm:px-8 py-2 rounded-md bg-secondary hover:bg-primary text-white text-sm sm:text-base font-medium shadow-sm hover:shadow-md transition-all duration-300 group cursor-pointer"
           >
             <span>See More</span>

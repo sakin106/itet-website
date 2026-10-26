@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 
 export function CtaBanner() {
   return (
@@ -129,7 +129,7 @@ export function CtaBanner() {
 
             <div className="mt-7 sm:mt-8">
               <Link
-                to="/membership-overview"
+                href="/membership-overview"
                 className="group relative inline-flex items-center justify-center px-7 py-3 text-xs sm:text-sm font-semibold text-white rounded-md bg-secondary hover:bg-primary hover:brightness-105 active:scale-[0.98] transition-all duration-200 cursor-pointer overflow-hidden shadow-sm"
               >
                 <span className="relative z-10">Become a Member</span>

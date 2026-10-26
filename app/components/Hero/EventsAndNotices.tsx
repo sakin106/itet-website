@@ -1,5 +1,7 @@
+"use client";
+
 import React, { useState } from "react";
-import { Link } from "react-router";
+import Link from "next/link";
 import {
   Calendar,
   Bell,
@@ -70,7 +72,7 @@ export function EventsAndNotices() {
             </h3>
           </div>
           <Link
-            to="/events"
+            href="/events"
             className="text-xs font-semibold text-primary hover:underline flex items-center gap-0.5"
           >
             <span>View All</span>
@@ -139,7 +141,7 @@ export function EventsAndNotices() {
             </h3>
           </div>
           <Link
-            to="/notices"
+            href="/notices"
             className="text-xs font-semibold text-primary hover:underline flex items-center gap-0.5"
           >
             <span>View All</span>
